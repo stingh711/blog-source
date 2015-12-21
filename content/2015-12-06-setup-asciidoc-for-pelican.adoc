@@ -1,0 +1,28 @@
+:doctitle: How to setup asciidoc for pelican
+:date: 2015-12-06 13:33
+:category: python
+:tags: blog, python, pelican
+:slug: how-to-setup-assciidoc-for-pelican
+:authors: Sting
+:summary: How to setup asciidoc for pelican
+
+最近asciidoc开始流行，没有仔细去看与markdown有什么区别，不过我觉得它比markdown的表格支持要好。（最近正好在用spring的restdoc来写一个项目的API文档）
+然后我就想用asciidoc来写这个博客。
+
+首先需要装asciidoc。在mac下很容易，+brew install asciidoc+.
+
+然后装pelican的asciidoc的插件。因为以前没有装过插件，路径配了好久才弄好。最简单的办法，先从github上把pelican的插件全部clone下来。然后在pelican的博客目录下面创建一个plugins目录，然后把asciidoc_reader这个插件从clone的目录拷贝过来。然后在pelicanconf里配置插件如下：
+
+[source,python]
+----
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['asciidoc_reader']
+----
+然后就OK了。
+
+需要注意的是，在asciidoc下，metadata和markdown是不一样的。需要用+:title:+。另外，如果要使用pygments作为默认的source code highlighter，需要在pelicanconf里做如下配置：
+
+[source,python]
+----
+ASCIIDOC_OPTIONS = ["-a source-highlighter=pygments"]
+----

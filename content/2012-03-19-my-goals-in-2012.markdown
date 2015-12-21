@@ -1,0 +1,28 @@
+Title: My goals in 2012
+Date: 2012-03-19 09:12
+Category: blog
+Tags: blog, essay
+Author: Sting
+Slug: my-2012-goals
+Summary: My goals in 2012
+
+It's March now, but I still need to set my goals in 2012.
+
+1. Restudy python, including advanced features, standard library and one WSGI framework.
+2. Shoot 100 photos which are good enough for me.
+3. Write my own blog theme.
+4. Keep journal everyday.
+5. Write a post at least per week.
+6. Finish my reciting of liuyi 5000.
+7. Finish another 50 lessons of English pod.
+
+Update on 2014-07-02
+
+1. Partial done. However, I haven't used python for a while, so I'v forgottn most of advanced features I studied that time.
+2. Done. For more than 100 actually.
+3. Yes, but it is ugly...
+4. No. I imported all my journals from other platform(Evernote, Simplenote) to DayOne recently and I've only written 92 posts in 2012.
+5. No. I didn't maintain blog anymore.
+6. No. However I finally finished it in 2013.
+7. No. Forget the reason.
+

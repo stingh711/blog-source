@@ -1,0 +1,68 @@
+:doctitle: Phoenix: a new mac window manager
+:date: 2015-12-20 21:10
+:category: mac
+:tags: mac
+:slug: phoenix-a-new-mac-window-managr
+:authors: Sting
+:summary: Phoenix, a new mac window manager.
+
+自从我的Macbook Air升级到最新以后，原来用的slate就变的非常慢了。Google了一下，发觉很多人都遇到这个问题，然后大家都推荐phoenix，一个新的window manager。
+
+Phoenix使用javascript作为配置文件，如果是第一次运行，会生成一个空白的配置文件，在~/.phoenix.js
+
+官方github上有几个可以用的sample configuration，最后一个比较简单好用。（我觉得phoenix的配置没有slate的直观好懂 ⇒ 在看了几份配置以后，感觉api还是比较容易的。）
+
+下面是我目前在用的最简单的
+[source,javascript]
+----
+'use strict';
+
+var keys = [];
+var cmd = ['cmd'];
+var cmdAlt = ['cmd', 'alt'];
+
+function alert(message) {
+  var modal = new Modal();
+  modal.message = message;
+  modal.duration = 2;
+  modal.show();
+}
+
+function fullscreen() {
+    var frame = Screen.mainScreen().visibleFrameInRectangle();
+    var width = Math.round(frame.width);
+    var height = Math.round(frame.height);
+
+    var rect = {x: frame.x, y: frame.y, width: width, height: height};
+    Window.focusedWindow().setFrame(rect);
+}
+
+function left() {
+    var frame = Screen.mainScreen().visibleFrameInRectangle();
+    var width = Math.round(frame.width);
+    var height = Math.round(frame.height);
+
+    var rect = {x: frame.x, y: frame.y, width: width/2, height: height};
+    Window.focusedWindow().setFrame(rect);
+}
+
+function right() {
+    var frame = Screen.mainScreen().visibleFrameInRectangle();
+    var width = Math.round(frame.width);
+    var height = Math.round(frame.height);
+
+    var rect = {x: (frame.x + width / 2), y: frame.y, width: width/2, height: height};
+    Window.focusedWindow().setFrame(rect);
+}
+
+
+keys.push(Phoenix.bind('1', cmd, function() {
+    fullscreen();
+}));
+keys.push(Phoenix.bind('2', cmd, function() {
+    left();
+}));
+keys.push(Phoenix.bind('3', cmd, function() {
+    right();
+}));
+----
