@@ -1,0 +1,20 @@
+:doctitle: How to manage dot files
+:date: 2015-12-22 09:30
+:category: mac
+:tags: mac
+:slug: how-to-manage-dot-files
+:authors: Sting
+:summary: How to manage dot files
+
+Home目录下的dot文件越来越多了，vim，emacs，zshell，phoenix，还有其他一些乱七八糟的。而且现在有好几台电脑要同步。
+稍微Google了一下，发现了一个python包管理起来还比较方便，名字就叫dotfiles。
+
+安装直接`pip install dotfiles`。
+
+然后在github上建一个repository，比如说mydotfiles。
+
+然后clone到home目录下面：`git clone https://github.com/xxx/mydotfiles Dotfiles`
+
+然后用命令`dotfiles --add ~/.vimrc`就可以把.vimrc加进来。
+
+提交，然后push以后，到另外一台电脑上也同样的方式clone下来，然后运行`dotfiles --sync`即可。

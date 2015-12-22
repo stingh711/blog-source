@@ -1,10 +1,10 @@
-Title: Virtualenv wrapper
-Date: 2014-07-08 13:00
-Category: python
-Tags: python mac
-Slug: virtualenv-wrapper
-Author: Sting
-Summary: Virtualenv wrapper
+:doctitle: Virtualenv wrapper
+:date: 2014-07-08 09:30
+:category: python
+:tags: python mac
+:slug: virtualenv-wrapper
+:authors: Sting
+:summary: Virtualenv wrapper, a useful util to work on virtualnev
 
 Virtualenvwrapper is a set of extensions to easy the use of virtualenv tool. I only use its `workon` command to active or switch different virtualenvs.
 
@@ -13,3 +13,5 @@ To install it, use command `pip install virtualenvwrapper`. Then `export WORKON_
 Now you can active or switch a virtualenv use command `workon myenv` if it is in your WORKON_HOME. To create a new virtualenv, use command `mkvirtualenv env1`.
 
 Here is its website: http://virtualenvwrapper.readthedocs.org/en/latest/command_ref.html
+
+Updated on 2015-12-22: oh-my-zsh has virtualenv and virtualenvwrapper plugins. Just enable it in your .zshrc. You don't need to do previous configuration.

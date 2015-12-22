@@ -15,7 +15,8 @@ TIMEZONE = 'Europe/Paris'
 
 DEFAULT_LANG = u'en'
 
-THEME = 'Flex'
+#THEME = 'Flex'
+THEME = 'pelican-octopress-theme'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
