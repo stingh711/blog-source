@@ -1,0 +1,18 @@
+:doctitle: Books to be read in 2016
+:date: 2015-12-25 17:00
+:category: book
+:tags: book
+:slug: books-to-be-read-in-2016
+:authors: Sting
+:summary: Books to be read in 2016
+
+It's time to make New Year's resolution. In 2016, I need to read more books on software architecture and the basic knowledge about computer science. Here is the draft list I want to read.
+
+1. Just enough software architecture
+1. Software architecture for developers
+1. Software architecture patterns
+1. Seven concurrency models in seven weeks
+1. Clojure programming
+1. Systems performance: Enterprise and the cloud
+1. Modern operating system
+1. Linux kernel development
