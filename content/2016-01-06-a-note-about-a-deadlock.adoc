@@ -1,0 +1,100 @@
+:doctitle: A note of a deadlock 
+:date: 2016-01-06 1:45
+:category: java
+:tags: java programming
+:slug: a-note-of-a-deadlock
+:authors: Sting
+:summary: A note of a deadlock
+
+[source,java]
+----
+class Downloader extends Thread {
+ 	
+  private InputStream in;
+ 	
+  private OutputStream out;
+ 	
+  private ArrayList<ProgressListener> listeners;
+ 	
+ 	
+  public Downloader(URL url, String outputFilename) throws IOException {
+ 	
+    in = url.openConnection().getInputStream();
+ 	
+    out = new FileOutputStream(outputFilename);
+ 	
+    listeners = new ArrayList<ProgressListener>();
+ 	
+  }
+ 	
+  public synchronized void addListener(ProgressListener listener) {
+ 	
+    listeners.add(listener);
+ 	
+  }
+ 	
+  public synchronized void removeListener(ProgressListener listener) {
+ 	
+    listeners.remove(listener);
+ 	
+  }
+ 	
+  private synchronized void updateProgress(int n) {
+ 	
+    for (ProgressListener listener: listeners)
+	
+      listener.onProgress(n);
+ 	
+  }
+ 	
+ 	
+  public void run() {
+ 	
+    int n = 0, total = 0;
+ 	
+    byte[] buffer = new byte[1024];
+ 	
+ 	
+    try {
+ 	
+      while((n = in.read(buffer)) != -1) {
+ 	
+        out.write(buffer, 0, n);
+ 	
+        total += n;
+ 	
+        updateProgress(total);
+ 	
+      }
+ 	
+      out.flush();
+ 	
+    } catch (IOException e) { }
+ 	
+  }
+ 	
+}
+----
+
+这部分代码可能会有问题，因为在updateProgress方法里面，调用了listener.onProgress方法，而listener是不受控制的。它可以调用任何方法，也可以获得另外的锁。
+唯一的解决是在加锁的方法内不要调用不受控制的方法。可以在updateProgress把listeners拷贝一份。
+
+[source,java]
+----
+private void updateProgress(int n) {
+ 	
+  ArrayList<ProgressListener> listenersCopy;
+ 	
+  synchronized(this) {
+	
+    listenersCopy = (ArrayList<ProgressListener>)listeners.clone();
+ 	
+  }
+ 	
+  for (ProgressListener listener: listenersCopy)
+ 	
+    listener.onProgress(n);
+ 	
+}
+----
+这样在调用onProgress这样的不受空的方法时，不用影响到Downloader里面的listeners。

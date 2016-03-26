@@ -1,0 +1,53 @@
+:doctitle: Notes about Java Memory Model
+:date: 2016-01-08 17:45
+:category: java
+:tags: java programming
+:slug: notes-about-jmm
+:authors: Sting
+:summary: Notes about Java Memory Model
+
+今天看了下JSR133的FAQ，记录一下。
+
+JSR133是关于Java Memory Model(JMM)，它包含了如下的内容。
+
+1. synchronized意味着什么
+2. final要确保什么
+3. volatile要确保什么
+
+== synchronized意味着什么？
+1. 代码块不会被reorder
+2. 多个线程不能同时访问被加锁的代码快
+3. 内存可见性
+
+== final要确保什么？
+final确保被初始化以后不需要同步就对其他所有线程可见。
+
+== volatile要确保什么?
+volatile确保被初始化以后不需要同步就对其他所有线程内存可见，而且对volatile变量的修改也会对其他线程内存可见
+
+然后又看了下http://shipilev.net/blog/2014/safe-public-construction/，才知道下面的代码还不是线程安全的。
+
+[source,java]
+----
+public class MyClass {
+   private List<String> list;
+
+  public MyClass() {
+    list = Arrays.asList("a", "b", "c", "d");
+  }
+}
+----
+因为list不是final，也不是volatile，所以构造函数对list的赋值未必对其他线程可见。
+
+== 关于多线程一些基本处理规则
+* 所有对共享变量的访问都要加锁
+* 读和写都需要加锁
+* 获得多个锁的时候要以固定的顺序，避免死锁
+* 在被同步的代码快里不要调用不受控制的代码
+* 同步的代码尽量简短
+
+== References
+
+* http://shipilev.net/blog/2014/all-fields-are-final/
+* http://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html
+

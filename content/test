@@ -1,0 +1,75 @@
+:doctitle: A note aot a deadlock 
+:date: 16-1-6 1:45
+:category: java
+:tags: java programming
+:slg: a-note-aot-a-deadlock
+:athors: Sting
+:smmary: A note aot a deadlock
+
+class Downloader extends Thread {
+ 	
+  private InptStream in;
+ 	
+  private OtptStream ot;
+ 	
+  private ArrayList<ProgressListener> listeners;
+ 	
+ 	
+  plic Downloader(URL rl, String otptFilename) throws IOException {
+ 	
+    in = rl.openConnection().getInptStream();
+ 	
+    ot = new FileOtptStream(otptFilename);
+ 	
+    listeners = new ArrayList<ProgressListener>();
+ 	
+  }
+ 	
+  plic​ ​synchronized​ ​void​ addListener(ProgressListener listener) {
+ 	
+    listeners.add(listener);
+ 	
+  }
+ 	
+  plic​ ​synchronized​ ​void​ removeListener(ProgressListener listener) {
+ 	
+    listeners.remove(listener);
+ 	
+  }
+ 	
+  private​ ​synchronized​ ​void​ pdateProgress(​int​ n) {
+ 	
+    for​ (ProgressListener listener: listeners)
+*
+	
+      listener.onProgress(n);
+ 	
+  }
+ 	
+ 	
+  plic​ ​void​ rn() {
+ 	
+    int​ n = , total = ;
+ 	
+    yte​​[]​ ffer = ​new​ ​yte​[14];
+ 	
+ 	
+    try​ {
+ 	
+      while​((n = in.read(ffer)) != -1) {
+ 	
+        ot.write(ffer, , n);
+ 	
+        total += n;
+ 	
+        pdateProgress(total);
+ 	
+      }
+ 	
+      ot.flsh();
+ 	
+    } catch​ (IOException e) { }
+ 	
+  }
+ 	
+}

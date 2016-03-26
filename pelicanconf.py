@@ -5,7 +5,14 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Sting'
 SITENAME = u'Pure Blogging'
-SITEURL = ''
+SITEURL = 'http://stingh711.github.io'
+SITETITLE = "Pure Blogging"
+SITESUBTITLE = "Sting's note about programming and life"
+SITEDESCRIPTION = ''
+ROBOTS = 'index, follow'
+MAIN_MENU = True
+
+MENUITEMS = (('Archives', '/archives.html'),)
 
 PATH = 'content'
 PLUGIN_PATHS = ['./plugins']
@@ -15,8 +22,8 @@ TIMEZONE = 'Europe/Paris'
 
 DEFAULT_LANG = u'en'
 
-#THEME = 'Flex'
-THEME = 'pelican-octopress-theme'
+THEME = 'Flex'
+#THEME = 'pelican-octopress-theme'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -29,7 +36,7 @@ ASCIIDOC_OPTIONS = ["-a source-highlighter=pygments"]
 ASCIIDOC_BACKEND = 'html5'
 
 # Blogroll
-LINKS = (('Tumblr', 'http://pure-blogging.tumblr.com'),
+SOCIAL = (('Tumblr', 'http://pure-blogging.tumblr.com'),
         ('Lofter', 'http://stinghu.lofter.com'),
         )
 
